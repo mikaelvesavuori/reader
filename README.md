@@ -1,8 +1,8 @@
 # Reader
 
-**A clean, reader-friendly proxy for the modern web.**
+**Reader-friendly Cloudflare Worker for safer, cleaner web reading.**
 
-Reader is a Cloudflare Worker that fetches pages and renders them in a safer, cleaner format with script-heavy clutter removed. It supports both reader extraction mode and mirror mode (no JS), with a modern, mobile-friendly reading UI.
+Reader is a clean, reader-friendly proxy for the modern web running on Cloudflare Worker. It fetches pages and renders them in a safer, cleaner format with script-heavy clutter removed. It supports both reader extraction mode and mirror mode (no JS), with a modern, mobile-friendly reading UI.
 
 ![Build Status](https://github.com/mikaelvesavuori/reader/actions/workflows/release.yml/badge.svg)
 
