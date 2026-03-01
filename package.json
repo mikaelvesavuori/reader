@@ -1,0 +1,45 @@
+{
+  "name": "reader",
+  "description": "Reader-friendly Cloudflare Worker for safer, cleaner web reading.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Mikael Vesavuori",
+  "keywords": [
+    "reader-mode",
+    "cloudflare-workers",
+    "web-scraping",
+    "content-extraction",
+    "html-sanitizer",
+    "privacy",
+    "edge-computing",
+    "javascript",
+    "wrangler",
+    "self-hosted"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikaelvesavuori/reader"
+  },
+  "bugs": {
+    "url": "https://github.com/mikaelvesavuori/reader/issues"
+  },
+  "homepage": "https://github.com/mikaelvesavuori/reader",
+  "main": "worker.js",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev worker.js",
+    "dev:remote": "wrangler dev worker.js --remote",
+    "lint": "biome check worker.js",
+    "format": "biome format --write worker.js",
+    "build": "rm -rf dist && mkdir -p dist && esbuild worker.js --bundle --minify --platform=browser --format=esm --target=es2022 --outfile=dist/worker.js",
+    "deploy": "npm run build && wrangler deploy dist/worker.js",
+    "release:bundle": "npm run build && cp package.json README.md LICENSE dist/",
+    "release:zip": "npm run release:bundle && cd dist && zip -r ../reader_release.zip ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2",
+    "@types/node": "25",
+    "esbuild": "latest",
+    "wrangler": "4"
+  }
+}
