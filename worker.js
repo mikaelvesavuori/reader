@@ -363,7 +363,7 @@ function renderReaderPage({ title, sourceUrl, bodyHtml, mode, theme, requestUrl 
 <body data-theme="${escapeHtml(theme)}" data-font="serif" data-text-size="md">
   <div class="page page-reader">
     <div class="corner-controls" aria-label="Reader controls">
-      <button class="icon-btn" id="shareButton" type="button" aria-label="Share article link" data-share-url="${escapeHtml(sourceUrl)}">
+      <button class="icon-btn" id="shareButton" type="button" aria-label="Share article link">
         ${shareIconSvg()}
       </button>
       <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode">
@@ -497,7 +497,7 @@ function readerUiScript() {
     const settingsClose = document.getElementById("settingsClose");
     const settingsForm = document.getElementById("settingsForm");
     const themeField = document.getElementById("themeField");
-    const shareUrl = shareButton ? shareButton.dataset.shareUrl || window.location.href : window.location.href;
+    const shareUrl = window.location.href;
     const shareTitle = (document.querySelector("h1")?.textContent || "Reader").trim();
     let toastTimer = null;
 
@@ -777,6 +777,9 @@ function sharedAppCss() {
   .page-home{
     width:min(42rem, calc(100% - 2rem));
     padding-top:18vh;
+  }
+  header{
+    margin-top: 4rem;
   }
   .header-row{
     display:flex;
@@ -1081,6 +1084,78 @@ function sharedAppCss() {
     .close-btn{
       top:.75rem;
       right:.74rem;
+    }
+  }
+  @media print{
+    @page{
+      size:auto;
+      margin:14mm 12mm 16mm;
+    }
+    :root{
+      color-scheme: light;
+    }
+    body{
+      background:#fff !important;
+      color:#000 !important;
+      font-size:10.5pt !important;
+      line-height:1.4 !important;
+    }
+    .corner-controls,
+    .settings-overlay,
+    .share-toast{
+      display:none !important;
+    }
+    .page{
+      width:100% !important;
+      max-width:none !important;
+      padding:0 !important;
+      margin:0 !important;
+    }
+    header{
+      margin-bottom:.45rem;
+    }
+    h1{
+      font-size:14pt !important;
+      line-height:1.2 !important;
+      margin:0 0 .2rem !important;
+    }
+    .meta{
+      margin:0 0 .55rem !important;
+      font-size:8.7pt !important;
+      line-height:1.25 !important;
+    }
+    .meta a{
+      color:#000 !important;
+      text-decoration:none;
+    }
+    main{
+      font-size:10.5pt !important;
+      line-height:1.42 !important;
+      margin-top:0 !important;
+    }
+    main h2, main h3{
+      font-size:11.5pt !important;
+      line-height:1.25 !important;
+      margin:1.05em 0 .4em !important;
+    }
+    main p{
+      margin:0 0 .75em !important;
+    }
+    main ul, main ol{
+      margin:0 0 .75em !important;
+    }
+    main pre{
+      font-size:9pt !important;
+      line-height:1.35 !important;
+      margin:0 0 .85em !important;
+    }
+    main img{
+      max-height:95mm !important;
+      margin:.2em auto .85em !important;
+    }
+    main img, main pre, main blockquote{
+      break-inside:avoid;
+      page-break-inside:avoid;
     }
   }`;
 }
