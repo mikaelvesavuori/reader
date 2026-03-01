@@ -25,19 +25,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build release worker bundle
-        run: npm run build
-
-      - name: Prepare release artifacts
-        run: |
-          mkdir -p release
-          cp dist/worker.js release/worker.js
-          cp README.md LICENSE package.json wrangler.toml release/
-          cd release
-          zip -r ../reader_${GITHUB_REF_NAME}.zip .
-          cd ..
-          shasum -a 256 dist/worker.js > worker.js.sha256
-          shasum -a 256 reader_${GITHUB_REF_NAME}.zip > reader_${GITHUB_REF_NAME}.zip.sha256
+      - name: Build and package release artifacts
+        run: npm run release
 
       - name: Publish GitHub release
         uses: softprops/action-gh-release@v2
@@ -45,5 +34,5 @@ jobs:
           files: |
             dist/worker.js
             worker.js.sha256
-            reader_${{ github.ref_name }}.zip
-            reader_${{ github.ref_name }}.zip.sha256
+            reader_release.zip
+            reader_release.zip.sha256

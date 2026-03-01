@@ -32,8 +32,7 @@
     "format": "biome format --write worker.js",
     "build": "rm -rf dist && mkdir -p dist && esbuild worker.js --bundle --minify --platform=browser --format=esm --target=es2022 --outfile=dist/worker.js",
     "deploy": "npm run build && wrangler deploy dist/worker.js",
-    "release:bundle": "npm run build && cp package.json README.md LICENSE dist/",
-    "release:zip": "npm run release:bundle && cd dist && zip -r ../reader_release.zip ."
+    "release": "bash ./scripts/release-artifacts.sh"
   },
   "devDependencies": {
     "@biomejs/biome": "2",
